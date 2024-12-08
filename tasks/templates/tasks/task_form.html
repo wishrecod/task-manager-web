@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Task Form</h2>
+<form method="post" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+    {% csrf_token %}
+    <div style="margin-bottom: 10px;">
+        {% for field in form %}
+            <div style="margin-bottom: 15px;">
+                <label for="{{ field.id_for_label }}" style="display: block; color: #ddd; font-weight: 500;">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <ul style="color: red; font-size: 14px; padding-left: 20px;">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <button type="submit" style="background: linear-gradient(135deg, #4a4a70, #62628c); padding: 10px 15px; border: none; border-radius: 5px; color: white; cursor: pointer;">
+        Save
+    </button>
+</form>
+{% endblock %}

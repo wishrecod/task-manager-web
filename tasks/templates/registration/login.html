@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+    {% csrf_token %}
+    <div style="margin-bottom: 15px;">
+        <label for="id_username" style="display: block; font-weight: 500; color: #fff;">Username</label>
+        <input type="text" name="username" id="id_username" value="{{ form.username.value }}" style="width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid #4a4a70; border-radius: 5px; color: #fff; margin-top: 5px;"/>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="id_password" style="display: block; font-weight: 500; color: #fff;">Password</label>
+        <input type="password" name="password" id="id_password" value="{{ form.password.value }}" style="width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid #4a4a70; border-radius: 5px; color: #fff; margin-top: 5px;"/>
+    </div>
+    
+    {% if form.non_field_errors %}
+        <div style="margin-bottom: 15px; color: #ff6347; font-weight: bold;">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <button type="submit" style="background: linear-gradient(135deg, #4a4a70, #62628c); padding: 10px 15px; border: none; border-radius: 5px; color: white; cursor: pointer;">
+        Login
+    </button>
+</form>
+<p style="margin-top: 20px; color: #fff;">Don't have an account? <a href="{% url 'signup' %}" style="color: #4a4a70; text-decoration: underline;">Sign up here</a>.</p>
+{% endblock %}

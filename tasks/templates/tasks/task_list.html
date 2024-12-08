@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="text-align: center; margin-bottom: 20px;">Your Tasks</h2>
+<div style="text-align: center; margin-bottom: 20px;">
+    <a href="{% url 'task_create' %}" style="background: linear-gradient(135deg, #4a4a70, #62628c); color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: 500; display: inline-block;">
+        + Create Task
+    </a>
+</div>
+<ul style="list-style: none; padding: 0; margin: 0;">
+    {% if tasks %}
+        {% for task in tasks %}
+            <li style="background: rgba(255, 255, 255, 0.05); padding: 15px 20px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong style="font-size: 16px; color: #fff;">{{ task.title }}</strong> - 
+                    <span style="color: {{ task.get_status_color }}">
+                        {{ task.get_status_display_text }}
+                    </span>
+                </div>
+                <div>
+                    <a href="{% url 'task_edit' task.id %}" style="background: linear-gradient(135deg, #4a90e2, #357ae8); color: white; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 14px; margin-right: 5px;">
+                        Edit
+                    </a>
+                    <a href="{% url 'task_delete' task.id %}" style="background: linear-gradient(135deg, #e24a4a, #e83535); color: white; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 14px;">
+                        Delete
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+    {% else %}
+        <li style="text-align: center; color: #fff; padding: 20px; font-size: 16px;">
+            No tasks found. Start by creating one!
+        </li>
+    {% endif %}
+</ul>
+{% endblock %}

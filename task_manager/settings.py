@@ -113,6 +113,11 @@ DATABASES = {
 
 
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+DISABLE_COLLECTSTATIC = 1  # Временно для деплоя, чтобы пропустить сборку статик-файлов
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
